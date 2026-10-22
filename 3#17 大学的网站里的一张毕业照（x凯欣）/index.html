@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Class of 2014 Convocation - University Intranet</title>
+  <style>
+    /* ================= 经典大学内联网设计规范 (全电脑自适应版) ================= */
+    :root {
+      --uni-blue: #003366; 
+      --uni-gold: #c5a059; 
+      --text-main: #333333;
+      --text-light: #666666;
+      --bg-body: #ececec;
+      --bg-content: #ffffff;
+      --border-color: #dddddd;
+      --font-stack: Arial, Helvetica, sans-serif; 
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background-color: var(--bg-body);
+      color: var(--text-main);
+      font-family: var(--font-stack);
+      line-height: 1.6;
+      font-size: 15px; 
+    }
+
+    /* 固定在顶部的 Header Wrapper */
+    .sticky-header-wrapper {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+    }
+
+    /* 顶部细条 */
+    .top-bar {
+      background-color: #222222;
+      color: #aaaaaa;
+      height: 32px;
+      font-size: 11px;
+    }
+    
+    /* 核心修改：弹性宽度设定，完美适配任何尺寸的电脑屏幕 */
+    .layout-inner {
+      width: 92%;
+      max-width: 1600px;
+      margin: 0 auto;
+    }
+
+    .top-bar-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 100%;
+    }
+    .top-bar a {
+      color: #aaaaaa;
+      text-decoration: none;
+      margin-left: 15px;
+    }
+    .top-bar a:hover { color: #ffffff; }
+
+    /* 头部 Logo 区域 */
+    .header {
+      background-color: var(--bg-content);
+      border-bottom: 4px solid var(--uni-gold);
+    }
+    .header-inner {
+      display: flex;
+      flex-wrap: wrap; /* 允许在较小电脑屏幕上折行适应 */
+      gap: 20px;
+      justify-content: space-between;
+      align-items: center;
+      padding: 25px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    
+    /* 替换为你提供的真实校徽 Logo，尺寸放大至 90px 以协调旁边文字 */
+    .brand-logo img {
+      height: 90px;
+      width: auto;
+      display: block;
+      object-fit: contain;
+    }
+    
+    .brand-text h1 {
+      font-family: "Times New Roman", Times, serif;
+      font-size: 24px;
+      color: var(--uni-blue);
+      text-transform: uppercase;
+      font-weight: normal;
+      letter-spacing: 1px;
+    }
+    .brand-text h2 {
+      font-size: 13px;
+      color: var(--text-light);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-top: 4px;
+    }
+
+    .search-box {
+      display: flex;
+    }
+    .search-box input {
+      padding: 8px 12px;
+      border: 1px solid var(--border-color);
+      width: 240px;
+      font-size: 13px;
+    }
+    .search-box button {
+      padding: 8px 20px;
+      background-color: var(--uni-blue);
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      font-weight: bold;
+      font-size: 13px;
+    }
+
+    /* 主导航栏 */
+    .nav {
+      background-color: var(--uni-blue);
+    }
+    .nav-inner {
+      display: flex;
+      flex-wrap: wrap; /* 防止窄屏挤压菜单 */
+    }
+    .nav-inner a {
+      color: #ffffff;
+      text-decoration: none;
+      padding: 16px 28px;
+      font-size: 14px;
+      font-weight: bold;
+      border-right: 1px solid rgba(255,255,255,0.1);
+    }
+    .nav-inner a:first-child { border-left: 1px solid rgba(255,255,255,0.1); }
+    .nav-inner a:hover, .nav-inner a.active {
+      background-color: #002244;
+    }
+
+    /* 页面主体结构：加入弹性伸缩机制 (Flexbox) 适配所有电脑 */
+    .main-container {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 30px;
+      margin-top: 30px;
+      margin-bottom: 60px;
+    }
+
+    /* 左侧主体内容区 (自动填满剩余空间) */
+    .content-area {
+      flex: 1 1 600px;
+      background-color: var(--bg-content);
+      padding: 40px 50px;
+      border: 1px solid var(--border-color);
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      min-width: 0; /* 防止内容撑破容器 */
+    }
+
+    /* 面包屑导航 */
+    .breadcrumbs {
+      font-size: 12px;
+      color: var(--text-light);
+      margin-bottom: 25px;
+      border-bottom: 1px dotted var(--border-color);
+      padding-bottom: 15px;
+    }
+    .breadcrumbs a {
+      color: var(--uni-blue);
+      text-decoration: none;
+    }
+
+    /* 新闻标题 */
+    .article-title {
+      font-family: "Times New Roman", Times, serif;
+      font-size: 32px;
+      color: var(--uni-blue);
+      margin-bottom: 15px;
+      font-weight: normal;
+    }
+
+    /* 附加工具条 */
+    .article-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #f9f9f9;
+      padding: 10px 15px;
+      border: 1px solid #eee;
+      margin-bottom: 30px;
+      font-size: 12px;
+      color: var(--text-light);
+    }
+    .meta-tools {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .text-size {
+      display: flex;
+      gap: 5px;
+      align-items: center;
+    }
+    .text-size span { cursor: pointer; color: var(--uni-blue); }
+    .text-size span:hover { text-decoration: underline; }
+
+    /* 核心照片呈现区 */
+    .article-image-box {
+      margin-bottom: 30px;
+      border: 1px solid var(--border-color);
+      padding: 5px;
+      background-color: #fff;
+    }
+    
+    .article-image-box img {
+      width: 100%;
+      height: auto;
+      display: block;
+      cursor: zoom-in;
+      transition: opacity 0.2s;
+    }
+    .article-image-box img:hover {
+      opacity: 0.95;
+    }
+    
+    .image-caption {
+      background-color: #f4f4f4;
+      padding: 12px;
+      font-size: 13px;
+      color: #555;
+      text-align: center;
+      border-top: 1px solid var(--border-color);
+    }
+
+    /* 官方新闻正文 */
+    .article-body {
+      font-size: 15px;
+      color: #333;
+      line-height: 1.8;
+    }
+    .article-body p {
+      margin-bottom: 20px;
+      text-align: justify;
+    }
+
+    /* 右侧边栏 (固定宽度，绝不乱跑) */
+    .sidebar {
+      flex: 0 0 340px; 
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+    .sidebar-widget {
+      background-color: var(--bg-content);
+      border: 1px solid var(--border-color);
+      padding: 25px;
+    }
+    .widget-title {
+      font-family: "Times New Roman", Times, serif;
+      font-size: 18px;
+      color: var(--uni-blue);
+      border-bottom: 2px solid var(--uni-gold);
+      padding-bottom: 10px;
+      margin-bottom: 20px;
+    }
+    .widget-list {
+      list-style: none;
+    }
+    .widget-list li {
+      padding: 10px 0;
+      border-bottom: 1px dashed var(--border-color);
+      font-size: 13px;
+    }
+    .widget-list li:last-child { border-bottom: none; }
+    .widget-list a {
+      color: var(--uni-blue);
+      text-decoration: none;
+    }
+    .widget-list a:hover { text-decoration: underline; }
+
+    /* 页脚 */
+    .footer {
+      background-color: #222222;
+      color: #888888;
+      text-align: center;
+      padding: 40px 20px;
+      font-size: 12px;
+      border-top: 4px solid var(--uni-blue);
+      margin-top: auto;
+    }
+
+    /* 放大镜覆盖层 (实拍时演员点击照片弹出) */
+    .lightbox-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background-color: rgba(0, 0, 0, 0.85);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.25s ease;
+      cursor: zoom-out;
+    }
+    .lightbox-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+    .lightbox-img {
+      max-width: 90%;
+      max-height: 90vh;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.6);
+      border: 5px solid #fff;
+      object-fit: contain;
+    }
+    .lightbox-hint {
+      position: absolute;
+      bottom: 40px;
+      color: rgba(255,255,255,0.7);
+      font-size: 14px;
+      letter-spacing: 1px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ================= 将所有头部内容包裹在 Sticky 容器中 ================= -->
+  <div class="sticky-header-wrapper">
+    
+    <!-- 实用工具栏 -->
+    <div class="top-bar">
+      <div class="layout-inner top-bar-inner">
+        <div>Current Students | Academic Staff | Library Services | Webmail</div>
+        <div>
+          <a href="#">A-Z Index</a>
+          <a href="#">Contact Us</a>
+          <a href="#">Support the University</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- 头部 Logo 区域 -->
+    <header class="header">
+      <div class="layout-inner header-inner">
+        <div class="brand">
+          <div class="brand-logo">
+            <img src="https://cdn.phototourl.com/member/2026-10-22-0122d2c5-ceed-4113-b263-a2a10fcdf074.png" alt="University Crest">
+          </div>
+          <div class="brand-text">
+            <h1>University Student Intranet</h1>
+            <h2>Alumni & Archives Portal</h2>
+          </div>
+        </div>
+        <div class="search-box">
+          <input type="text" placeholder="Search news archives...">
+          <button>Search</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- 导航栏 -->
+    <nav class="nav">
+      <div class="layout-inner nav-inner">
+        <a href="#">Home</a>
+        <a href="#">University Life</a>
+        <a href="#">Academic Directories</a>
+        <a href="#">Research</a>
+        <a href="#" class="active">Alumni Network</a>
+        <a href="#">News & Events</a>
+      </div>
+    </nav>
+
+  </div>
+  <!-- ================= Sticky 容器结束 ================= -->
+
+  <!-- 主体区域 -->
+  <div class="layout-inner main-container">
+    
+    <!-- 左侧内容区 -->
+    <main class="content-area">
+      <div class="breadcrumbs">
+        <a href="#">Home</a> &gt; <a href="#">Alumni Network</a> &gt; <a href="#">News Archive</a> &gt; 2014 &gt; Convocation
+      </div>
+
+      <h2 class="article-title">Class of 2014 Master's Degree Convocation Highlights</h2>
+      
+      <div class="article-meta">
+        <div><strong>Published:</strong> July 15, 2014 &nbsp;|&nbsp; <strong>Category:</strong> Alumni Events</div>
+        <div class="meta-tools">
+          <div class="text-size">
+            Text Size: 
+            <span style="font-size:11px;">A-</span> 
+            <span style="font-size:13px;">A</span> 
+            <span style="font-size:15px; font-weight:bold;">A+</span>
+          </div>
+          <span style="color:#ccc;">|</span>
+          <span style="cursor:pointer; color:var(--uni-blue);">🖨 Print</span>
+          <span style="cursor:pointer; color:var(--uni-blue);">✉ Email</span>
+        </div>
+      </div>
+
+      <!-- 核心照片区 (图片已替换) -->
+      <div class="article-image-box">
+        <img id="graduation-photo" src="https://cdn.phototourl.com/member/2026-10-22-2148839b-d08c-4130-9eb6-a69a235ef105.jpg" alt="Class of 2014 Master's Graduates" onclick="openLightbox()">
+        <div class="image-caption">
+          Graduates from various Master's programs gathering for a group photograph following the 2014 Commencement Ceremony at the university square.
+        </div>
+      </div>
+
+      <div class="article-body">
+        <p>The University proudly congratulates the graduating Class of 2014. The annual commencement ceremony, held last week, marked the culmination of years of rigorous academic training, research, and dedication for our post-graduate cohorts.</p>
+        <p>This year, our diverse Master's programs saw an exceptional group of professionals and academics receive their degrees across various disciplines. The Vice-Chancellor emphasized in the opening address the critical role our graduates play in upholding societal order, ethical leadership, and innovation in their respective fields.</p>
+        <p>Following the formal ceremony in the Grand Hall, graduates, academic staff, and families gathered at the quadrangle for the traditional cohort photographs. We wish all our 2014 alumni the utmost success as they return to their professional careers or embark on new journeys.</p>
+      </div>
+    </main>
+
+    <!-- 右侧边栏 -->
+    <aside class="sidebar">
+      
+      <div class="sidebar-widget">
+        <div class="widget-title">Archive Navigation</div>
+        <ul class="widget-list">
+          <li><a href="#">2014 Year in Review</a></li>
+          <li><a href="#">Vice-Chancellor's Honors List</a></li>
+          <li><a href="#">Alumni Achievements</a></li>
+          <li><a href="#">Photo Galleries</a></li>
+        </ul>
+      </div>
+
+      <div class="sidebar-widget">
+        <div class="widget-title">Alumni Services</div>
+        <ul class="widget-list">
+          <li><a href="#">Update Your Contact Info</a></li>
+          <li><a href="#">Request Official Transcripts</a></li>
+          <li><a href="#">Career Services for Alumni</a></li>
+          <li><a href="#">Join the Mentorship Program</a></li>
+        </ul>
+      </div>
+
+    </aside>
+  </div>
+
+  <footer class="footer">
+    <p>© 2014 University Intranet & Alumni Services. All rights reserved.</p>
+    <p style="margin-top:8px; color:#555;">This page is an archived version maintained by the University IT Department.</p>
+  </footer>
+
+  <!-- 放大镜覆盖层 (图片已同步替换) -->
+  <div class="lightbox-overlay" id="lightbox" onclick="closeLightbox()">
+    <img class="lightbox-img" src="https://cdn.phototourl.com/member/2026-10-22-2148839b-d08c-4130-9eb6-a69a235ef105.jpg" alt="Zoomed Photo">
+    <div class="lightbox-hint">Click anywhere to close</div>
+  </div>
+
+  <script>
+    const lightbox = document.getElementById('lightbox');
+
+    // 点击网页中的图片，瞬间全屏放大
+    function openLightbox() {
+      lightbox.classList.add('active');
+    }
+
+    // 点击放大后的区域，关闭放大
+    function closeLightbox() {
+      lightbox.classList.remove('active');
+    }
+
+    // 片场防呆：按键盘 ESC 键也可以关闭放大，方便NG重拍
+    window.addEventListener('keydown', function(event) {
+      if (event.key === 'Escape') {
+        closeLightbox();
+      }
+    });
+  </script>
+</body>
+</html>
